@@ -263,6 +263,21 @@ export async function getUser(id) {
     let user = await User.findOne( { _id: id });
     return user;
 }
+
+export async function getUserByAuthId(authId) {
+    let user = await User.findOne( { authId: authId });
+    return user;
+}
+
+export function registerUser(name, authId) {
+    new User({
+        is_admin: false,
+        api_access: false,
+        name: name,
+        authId: authId,
+        created: new Date()
+    }).save();
+}
 // END USER FUNCTIONS --------------------------------------------------------------------------------------------------------------------------
 
 // SHOWCASE FUNCTIONS --------------------------------------------------------------------------------------------------------------------------
@@ -304,5 +319,7 @@ export default {
     deleteShowcase,
     updateUserToken,
     isUserTokenValid,
-    getUser
+    getUser,
+    getUserByAuthId,
+    registerUser
 };

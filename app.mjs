@@ -66,7 +66,9 @@ app.use(expressSession({
 
 const authService = auth(app, {
     successRedirect: '/account',
-    failureRedirect: '/unauthorised'
+    failureRedirect: '/unauthorised',
+    baseUrl: process.env.baseUrl,
+    providers: credentials.authProviders
 });
 authService.init();
 authService.registerRoutes();
